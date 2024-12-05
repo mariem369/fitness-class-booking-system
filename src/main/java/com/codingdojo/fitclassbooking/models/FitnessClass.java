@@ -55,8 +55,6 @@ public class FitnessClass {
     @Positive(message = "Maximum number of students must be greater than zero")
     private Integer maxStudents;
 
-    @NotNull(message = "Image name is required")
-    @Size(min = 5, max = 255, message = "Image name must be between 5 and 255 characters")
     private String imageName; 
 
     @ManyToMany

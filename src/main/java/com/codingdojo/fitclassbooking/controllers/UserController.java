@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.codingdojo.fitclassbooking.models.LoginUser;
 import com.codingdojo.fitclassbooking.models.User;
+import com.codingdojo.fitclassbooking.services.FitnessClassService;
 import com.codingdojo.fitclassbooking.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +21,8 @@ public class UserController {
 	
 	 @Autowired
 	    private UserService userService;
+	 @Autowired
+	    private FitnessClassService fitnessClassService;
 	 
 	 @GetMapping("/")
 	    public String index(Model model) {
@@ -84,7 +87,7 @@ public class UserController {
 	    	}
 	    	User.Role role = (User.Role) session.getAttribute("role");
 	    	if (role != User.Role.INSTRUCTOR) {
-	    		return "redirect:/fitnessClasses";
+	    		return "redirect:/";
 	    	}
 	    	return "dashboard.jsp";
 	    }

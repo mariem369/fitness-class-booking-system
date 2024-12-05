@@ -99,7 +99,7 @@
     <div class="container">
         <div class="form-card active-card" id="registerCard">
             <h3 class="m-2 text-success fw-bold">Register</h3>
-            <form:form action="/register" method="post" modelAttribute="newUser" class="form" onsubmit="return validateRegisterForm()">
+            <form:form action="/register" method="post" modelAttribute="newUser" class="form">
                 <div class="d-flex p-1 m-1">
                     <form:label class="w-50" path="firstName">First Name :</form:label>
                     <form:input class="form-control-sm" path="firstName"/>
@@ -146,7 +146,7 @@
 
         <div class="form-card" id="loginCard">
             <h3 class="m-2 text-success fw-bold">Log In</h3>
-            <form:form action="/login" method="post" modelAttribute="newLogin" class="form" onsubmit="return validateLoginForm()">
+            <form:form action="/login" method="post" modelAttribute="newLogin" class="form">
                 <div class="d-flex p-1 m-1">
                     <form:label class="w-50" path="email">Email :</form:label>
                     <form:input class="form-control-sm" path="email"/>
