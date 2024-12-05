@@ -1,11 +1,17 @@
 package com.codingdojo.fitclassbooking.models;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
@@ -45,10 +51,23 @@ public class User {
     @Size(min=8, max=128, message="Password must be between 8 and 128 characters")
     private String password;
     
+    private double latitude;
+    private double longitude;
+    
     @Transient
     @NotEmpty(message="Confirm Password is required!")
     @Size(min=8, max=128, message="Confirm Password must be between 8 and 128 characters")
     private String confirm;
+    
+    @ManyToMany
+    @JoinTable(
+        name = "enrollements", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "fitness_class_id"))
+    private List<FitnessClass> fitnessClasses;
+    
+    @OneToMany(mappedBy = "instructor")
+    private List<FitnessClass> createdClasses;
   
     public User() {}
 
@@ -106,6 +125,38 @@ public class User {
 
 	public void setConfirm(String confirm) {
 		this.confirm = confirm;
+	}
+
+	public List<FitnessClass> getFitnessClasses() {
+		return fitnessClasses;
+	}
+
+	public void setFitnessClasses(List<FitnessClass> fitnessClasses) {
+		this.fitnessClasses = fitnessClasses;
+	}
+
+	public List<FitnessClass> getCreatedClasses() {
+		return createdClasses;
+	}
+
+	public void setCreatedClasses(List<FitnessClass> createdClasses) {
+		this.createdClasses = createdClasses;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
   
 }
