@@ -63,4 +63,5 @@ public class FitnessClassService {
             fitnessClass.setImageName(uniqueFileName);
             return fitnessClassRepository.save(fitnessClass);
 	 }
+	
 }
