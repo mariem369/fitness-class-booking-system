@@ -113,5 +113,17 @@ public class MainController {
 			
 			return "redirect:/instructors/dashboard";
 	    }
-	
+	    
+	    @GetMapping("/fitnessClasses/{id}/details")
+	    public String showDetails(@PathVariable("id") Long id, Model model, HttpSession session) {
+	    	if (session.getAttribute("userId") == null ) {
+	    		return "redirect:/";
+	    	}
+	    	User.Role role = (User.Role) session.getAttribute("role");
+	    	if (role != User.Role.INSTRUCTOR) {
+	    		return "redirect:/";
+	    	}
+	    	model.addAttribute("fitnessClass", fitnessClassService.findFitnessClass(id));
+	    	return "detailClass.jsp";
+	    }
 }

@@ -58,7 +58,7 @@
     <!-- Class Details -->
     <div class="container">
       <div class="class-details">
-        <h3 class="text-center text-success">Class Details</h3>
+        <h3 class="text-center text-success">Fitness Class Details</h3>
         <p><strong>Title:</strong> ${fitnessClass.title}</p>
         <p><strong>Description:</strong> ${fitnessClass.description}</p>
         <p><strong>Price:</strong> ${fitnessClass.price} USD</p>
@@ -66,7 +66,7 @@
         <p><strong>Time:</strong> ${fitnessClass.time}</p>
         <p><strong>Venue:</strong> ${fitnessClass.venue.name}</p>
         <p><strong>Max Students:</strong> ${fitnessClass.maxStudents}</p>
-        <p><strong>Enrolled Students:</strong> ${fitnessClass.enrolledStudents.size()}</p>
+        <p><strong>Enrolled Students:</strong> ${fitnessClass.students.size()}</p>
       </div>
 
       <!-- Table of Enrolled Students -->
@@ -81,7 +81,7 @@
             </tr>
           </thead>
           <tbody>
-            <c:forEach var="student" items="${fitnessClass.enrolledStudents}">
+            <c:forEach var="student" items="${fitnessClass.students}">
               <tr>
                 <td>${student.firstName}</td>
                 <td>${student.lastName}</td>

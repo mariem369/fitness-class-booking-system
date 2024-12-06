@@ -75,14 +75,13 @@
                     </div>
                     <div class="class-details">
                         <h4>${fitnessClass.title}</h4>
-                        <p>${fitnessClass.description}</p>
                         <p><strong>Price:</strong> ${fitnessClass.price}</p>
                         <p><strong>Day:</strong> ${fitnessClass.dayOfWeek}</p>
 						<p><strong>Time:</strong> ${fitnessClass.time}</p>
 						<p><strong>Venue:</strong> ${fitnessClass.venue.name}</p>
                     </div>
                     <div class="class-actions">
-                        <a href="/fitnessClasses/${fitnessClass.id}/details" class="btn btn-info btn text-light" style="width:100px;">Detail</a>
+                        <a href="/fitnessClasses/${fitnessClass.id}/details" class="btn btn-info btn text-light" style="width:100px;">Details</a>
                         <form action="/fitnessClasses/${fitnessClass.id}/edit" method="post">
  							<input type="submit" class="btn btn-warning text-light" value="edit" style="width:100px;" />
  						</form>
