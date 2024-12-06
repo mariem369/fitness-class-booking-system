@@ -97,6 +97,7 @@ public class UserController {
 	    
 	    @GetMapping("/fitnessClasses")
 	    public String fitnessClasses(HttpSession session, Model model) {
+	    	model.addAttribute("fitnessClasses", fitnessClassService.allFitnessClasses());
 	    	return "fitnessClasses.jsp";
 	    }
 	    

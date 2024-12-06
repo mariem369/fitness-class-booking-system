@@ -10,4 +10,6 @@ import com.codingdojo.fitclassbooking.models.FitnessClass;
 @Repository
 public interface FitnessClassRepository extends CrudRepository<FitnessClass, Long> {
 	List<FitnessClass> findByInstructorId(Long instructorId);
+	
+	List<FitnessClass> findAll();
 }

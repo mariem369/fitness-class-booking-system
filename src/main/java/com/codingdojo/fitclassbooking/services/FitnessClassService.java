@@ -66,5 +66,9 @@ public class FitnessClassService {
 	        }
 	        return fitnessClassRepository.save(fitnessClass);
 	    }
+	 
+	 public List<FitnessClass> allFitnessClasses() {
+	     return fitnessClassRepository.findAll();
+	 }
 	
 }
