@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -72,5 +75,43 @@ public class MainController {
 		
 		return "redirect:/instructors/dashboard";
 	}
+	
+	@DeleteMapping("/fitnessClasses/{id}/delete")
+    public String removeFitnessClass(@PathVariable("id") Long id) {
+		FitnessClass fitnessClass = fitnessClassService.findFitnessClass(id);
+		for (User student : fitnessClass.getStudents()) {
+	        student.getFitnessClasses().remove(fitnessClass);
+	    }
+    	fitnessClassService.deleteFitnessClass(id);
+    	return "redirect:/instructors/dashboard";
+    }
+	
+	 @PostMapping("/fitnessClasses/{id}/edit")
+	    public String editFitnessClass(@PathVariable("id") Long id, Model model, HttpSession session) {
+	    	if (session.getAttribute("userId") == null ) {
+	    		return "redirect:/";
+	    	}
+	    	User.Role role = (User.Role) session.getAttribute("role");
+	    	if (role != User.Role.INSTRUCTOR) {
+	    		return "redirect:/";
+	    	}
+	    	model.addAttribute("fitnessClass", fitnessClassService.findFitnessClass(id));
+	    	model.addAttribute("venues", venueService.allVenues());
+			model.addAttribute("days", DayOfWeek.values());
+	    	return "editClass.jsp";
+	    }
+	    
+	    @PutMapping("/fitnessClasses/update/{id}")
+	    public String updateFitnessClass(@Valid @ModelAttribute FitnessClass fitnessClass,
+	    	BindingResult result, Model model, @RequestParam("image") MultipartFile file) {
+	    	fitnessClassService.updateFitnessClass(fitnessClass, result, file);
+			if(result.hasErrors()) {
+				model.addAttribute("venues", venueService.allVenues());
+				model.addAttribute("days", DayOfWeek.values());
+	            return "editClass.jsp";
+	        }
+			
+			return "redirect:/instructors/dashboard";
+	    }
 	
 }
