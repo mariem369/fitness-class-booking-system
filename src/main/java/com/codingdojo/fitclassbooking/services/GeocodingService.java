@@ -3,7 +3,6 @@ package com.codingdojo.fitclassbooking.services;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,33 +12,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class GeocodingService {
 
-    @Value("${google.api.key}")
-    private String apiKey;
-
-    private static final String GEOCODING_API_URL = "https://maps.googleapis.com/maps/api/geocode/json";
+    private static final String NOMINATIM_API_URL = "https://nominatim.openstreetmap.org/search";
 
     public Map<String, Double> getCoordinates(String address) {
         RestTemplate restTemplate = new RestTemplate();
         Map<String, Double> coordinates = new HashMap<>();
 
         try {
-            // Build the API URL
-            String url = String.format("%s?address=%s&key=%s", GEOCODING_API_URL, address.replace(" ", "+"), apiKey);
+            String url = String.format("%s?q=%s&format=json", 
+                                        NOMINATIM_API_URL,
+                                        address.replace(" ", "+"));
 
-            // Send the GET request to the API
             String response = restTemplate.getForObject(url, String.class);
 
-            // Parse the JSON response
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode root = objectMapper.readTree(response);
 
-            JsonNode results = root.path("results");
-            if (results.isArray() && results.size() > 0) {
-                JsonNode location = results.get(0).path("geometry").path("location");
-                double latitude = location.path("lat").asDouble();
-                double longitude = location.path("lng").asDouble();
+            if (root.isArray() && root.size() > 0) {
+                JsonNode firstResult = root.get(0);
+                double latitude = firstResult.path("lat").asDouble();
+                double longitude = firstResult.path("lon").asDouble();
 
-                // Populate the coordinates map
                 coordinates.put("latitude", latitude);
                 coordinates.put("longitude", longitude);
             } else {

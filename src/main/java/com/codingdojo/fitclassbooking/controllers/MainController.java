@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.codingdojo.fitclassbooking.models.FitnessClass;
-import com.codingdojo.fitclassbooking.models.LoginUser;
 import com.codingdojo.fitclassbooking.models.User;
 import com.codingdojo.fitclassbooking.models.Venue;
 import com.codingdojo.fitclassbooking.services.FitnessClassService;
