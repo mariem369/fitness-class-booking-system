@@ -62,7 +62,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="/dashboard">Dashboard</a>
+              <a class="nav-link active" href="/instructors/dashboard">Dashboard</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/logout">Logout</a>
@@ -76,56 +76,72 @@
     <div class="container w-75">
       <div class="row">
         <!-- Form for Adding Class -->
-        <div class="col-md-6 form-container">
-          <h3 class="text-center text-success fw-bold">Add Class</h3>
+        <div class="col-md-4 form-container">
+          <h3 class="text-center text-success fw-bold mb-2">Add Class</h3>
           <form:form action="/createFitnessClass" method="post" modelAttribute="fitnessClass" enctype="multipart/form-data" class="form">
             <form:input type="hidden" path="instructor" value="${userId}" />
             <div class="mb-3">
-              <form:label class="form-label" path="imageName">Image</form:label>
-              <input type="file" class="form-control" name="imageName" accept="image/*" />
+            	<div class="d-flex align-items-center">
+              		<label class="form-label w-50">Image</label>
+              		<input type="file" class="form-control" name="image" accept="image/*" required />
+              	</div>
               <form:errors class="text-danger" path="imageName"/>
             </div>
             <div class="mb-3">
-              <form:label class="form-label" path="title">Title</form:label>
+            <div class="d-flex align-items-center">
+              <form:label class="form-label w-50" path="title">Title</form:label>
               <form:input class="form-control" path="title"/>
+            </div>
               <form:errors class="text-danger" path="title"/>
             </div>
             <div class="mb-3">
-              <form:label class="form-label" path="description">Description</form:label>
-              <form:textarea class="form-control" path="description"></form:textarea>
+            	<div class="d-flex align-items-center">
+              		<form:label class="form-label w-50" path="description">Description</form:label>
+              		<form:textarea class="form-control" path="description"></form:textarea>
+              	</div>
               <form:errors class="text-danger" path="description"/>
             </div>
             <div class="mb-3">
-              <form:label class="form-label" path="price">Price</form:label>
-              <form:input class="form-control" path="price"/>
+            	<div class="d-flex align-items-center">
+              		<form:label class="form-label w-50" path="price">Price</form:label>
+              		<form:input class="form-control" path="price"/>
+              	</div>
               <form:errors class="text-danger" path="price"/>
             </div>
             <div class="mb-3">
-              <form:label class="form-label" path="dayOfWeek">Day of the week</form:label>
-              <form:select class="form-control" path="dayOfWeek">
-                <c:forEach var="day" items="${days}">
-                  <form:option value="${day}">${day}</form:option>
-                </c:forEach>
-              </form:select>
+            	<div class="d-flex align-items-center">
+              		<form:label class="form-label w-50" path="dayOfWeek">Day</form:label>
+              		<form:select class="form-control" path="dayOfWeek">
+                	<c:forEach var="day" items="${days}">
+                  		<form:option value="${day}">${day}</form:option>
+                	</c:forEach>
+              		</form:select>
+              	</div>
               <form:errors class="text-danger" path="dayOfWeek"/>
             </div>
             <div class="mb-3">
-              <form:label class="form-label" path="time">Time</form:label>
-              <form:input type="time" class="form-control" path="time"/>
+            	<div class="d-flex align-items-center">
+              		<form:label class="form-label w-50" path="time">Time</form:label>
+              		<form:input type="time" class="form-control" path="time"/>
+              	</div>
               <form:errors class="text-danger" path="time"/>
             </div>
             <div class="mb-3">
-              <form:label class="form-label" path="venue">Venue</form:label>
-              <form:select class="form-control" path="venue">
-                <c:forEach var="v" items="${venues}">
-                  <form:option value="${v.getId()}">${v.getName()}</form:option>
-                </c:forEach>
-              </form:select>
+            	<div class="d-flex align-items-center">
+              		<form:label class="form-label w-50" path="venue">Venue</form:label>
+              		<form:select class="form-control" path="venue">
+                		<c:forEach var="v" items="${venues}">
+                  			<form:option value="${v.getId()}">${v.getName()}</form:option>
+                		</c:forEach>
+              		</form:select>
+              	</div>
               <form:errors class="text-danger" path="venue"/>
             </div>
             <div class="mb-3">
-              <form:label class="form-label" path="maxStudents">Max Number</form:label>
-              <form:input type="number" class="form-control" path="maxStudents"/>
+            	<div class="d-flex align-items-center">
+              		<form:label class="form-label w-50" path="maxStudents">Max Number</form:label>
+              		<form:input type="number" class="form-control" path="maxStudents"/>
+              	</div>
               <form:errors class="text-danger" path="maxStudents"/>
             </div>
             <button type="submit" class="btn btn-primary w-100">Submit</button>
@@ -174,7 +190,7 @@
     <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 	<script>
-	     const defaultLat = '${job.latitude}';
+	    /* const defaultLat = '${job.latitude}';
 	     const defaultLng = '${job.longitude}';
 	     const map = L.map('map').setView([defaultLat, defaultLng], 13);
 
@@ -225,7 +241,7 @@
 	                 console.error('Error fetching address:', error);
 	                 document.getElementById('address').value = 'Error fetching address';
 	             });
-	     });
+	     }); */
 	   </script>
   </body>
 </html>

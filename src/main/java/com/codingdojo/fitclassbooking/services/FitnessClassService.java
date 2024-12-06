@@ -2,6 +2,7 @@ package com.codingdojo.fitclassbooking.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,10 @@ public class FitnessClassService {
             }
             fitnessClass.setImageName(uniqueFileName);
             return fitnessClassRepository.save(fitnessClass);
+	 }
+	
+	 public List<FitnessClass> getFitnessClassesByInstructor(Long instructorId) {
+	        return fitnessClassRepository.findByInstructorId(instructorId);
 	 }
 	
 }

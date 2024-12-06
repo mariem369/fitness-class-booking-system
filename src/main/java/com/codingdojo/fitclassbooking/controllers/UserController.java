@@ -89,6 +89,9 @@ public class UserController {
 	    	if (role != User.Role.INSTRUCTOR) {
 	    		return "redirect:/";
 	    	}
+	    	Long userId = (Long) session.getAttribute("userId");
+	    	
+	    	model.addAttribute("myClasses", fitnessClassService.getFitnessClassesByInstructor(userId));
 	    	return "dashboard.jsp";
 	    }
 	    
