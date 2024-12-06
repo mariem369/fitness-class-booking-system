@@ -155,5 +155,12 @@ public class FitnessClass {
 	public void setInstructor(User instructor) {
 		this.instructor = instructor;
 	}
+	
+	public boolean isUserEnrolled(Long userId) {
+        if (students == null || userId == null) {
+            return false;
+        }
+        return students.stream().anyMatch(student -> student.getId().equals(userId));
+    }
    
 }

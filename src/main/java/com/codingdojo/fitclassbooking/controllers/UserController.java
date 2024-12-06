@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.codingdojo.fitclassbooking.models.LoginUser;
@@ -99,6 +100,26 @@ public class UserController {
 	    public String fitnessClasses(HttpSession session, Model model) {
 	    	model.addAttribute("fitnessClasses", fitnessClassService.allFitnessClasses());
 	    	return "fitnessClasses.jsp";
+	    }
+	    
+	    @GetMapping("/fitnessClass/{id}")
+	    public String fitnessClassDetails(@PathVariable("id")Long id, Model model, HttpSession session) {
+	    	if (session.getAttribute("userId") == null ) {
+	    		return "redirect:/fitnessClasses";
+	    	}
+	    	model.addAttribute("fitnessClass", fitnessClassService.findFitnessClass(id));
+	    	return "viewDetails.jsp";
+	    }
+	    
+	    @GetMapping("/users/dashboard")
+	    String myFitnessClasses(Model model, HttpSession session) {
+	    	if (session.getAttribute("userId") == null ) {
+	    		return "redirect:/";
+	    	}
+	    	Long userId = (Long) session.getAttribute("userId");
+	    	model.addAttribute("currentUser", userService.findUser(userId));
+	    	return "myClasses.jsp";
+	    
 	    }
 	    
 	    @GetMapping("/logout")

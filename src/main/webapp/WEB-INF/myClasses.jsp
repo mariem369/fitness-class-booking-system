@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/userDashboard">Back to Dashboard</a>
+                        <a class="nav-link" href="/fitnessClasses">Fitness Classes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Log Out</a>
@@ -54,7 +54,7 @@
     <div class="container my-4">
         <h2>Your Booked Classes</h2>
         
-        <c:forEach items="${bookedClasses}" var="fitnessClass">
+        <c:forEach items="${currentUser.fitnessClasses}" var="fitnessClass">
             <div class="class-item">
                 <div class="class-thumbnail">
                     <img src="${pageContext.request.contextPath}/uploads/${fitnessClass.imageName}"
@@ -69,7 +69,9 @@
                     <p><strong>Venue:</strong> ${fitnessClass.venue.name}</p>
                 </div>
                 <div class="class-actions">
-                    <a href="/fitnessClasses/${fitnessClass.id}/details" class="btn btn-info text-light" style="width:100px;">View Details</a>
+                    <form action="/fitnessClasses/${fitnessClass.id}/cancel" method="post">
+                		<input type="submit" value="Cancel Booking" class="btn btn-warning" style="width:200px;" />
+            		</form>
                 </div>
             </div>
         </c:forEach>

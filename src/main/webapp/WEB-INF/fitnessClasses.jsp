@@ -52,6 +52,9 @@
             <a class="navbar-brand" href="#">User Dashboard</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
+                	<li class="nav-item">
+                        <a class="nav-link" href="/users/dashboard">Dashboard</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Log Out</a>
                     </li>
@@ -61,10 +64,10 @@
     </nav>
 
     <div class="container dashboard-container">
-        <h2>Welcome, ${firstName}!</h2> <!-- Welcome message with the user's first name -->
+        <h2 class="mb-4">Welcome, ${firstName}!</h2> <!-- Welcome message with the user's first name -->
 
         <div>
-            <c:forEach items="${instructorClasses}" var="fitnessClass">
+           <!--   <c:forEach items="${fitnessClasses}" var="fitnessClass">
                 <div class="class-item">
                     <div class="class-thumbnail">
                         <img src="${pageContext.request.contextPath}/uploads/${fitnessClass.imageName}" 
@@ -76,11 +79,31 @@
                         <p><strong>Price:</strong> ${fitnessClass.price}</p>
                     </div>
                     <div class="class-actions">
-                        <a href="/fitnessClasses/${fitnessClass.id}/details" class="btn btn-info btn text-light" style="width:100px;">View Details</a>
+                        <a href="/fitnessClasses/${fitnessClass.id}" class="btn btn-info btn text-light" style="width:100px;">View Details</a>
                     </div>
                 </div>
-            </c:forEach>
+            </c:forEach> -->
         </div>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"> 
+    		<c:forEach var="fitnessClass" items="${fitnessClasses}">
+        		<div class="col">
+            		<div class="card h-100">
+                		<img src="${pageContext.request.contextPath}/uploads/${fitnessClass.imageName}" 
+                     		class="card-img-top" alt="${fitnessClass.title}" style="object-fit: cover;overflow: hidden; height: 200px;">
+                	<div class="card-body d-flex flex-column">
+                    	<h5 class="card-title">${fitnessClass.title}</h5>
+                    		<div>
+                    			<div class="d-flex justify-content-between align-items-center">
+                    				<p> ${fitnessClass.venue.name}</p>
+                    				<p>$ ${fitnessClass.price}</p>
+                    			</div>
+                    			<a href="/fitnessClass/${fitnessClass.id}" class="btn btn-info btn text-light mt-auto" style="width: 100%;">View Details</a>
+                    		</div>
+                		</div>
+            		</div>
+        		</div>
+   	 		</c:forEach>
+		</div>   
     </div>
 
     <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>

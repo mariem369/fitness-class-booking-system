@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.codingdojo.fitclassbooking.models.FitnessClass;
+import com.codingdojo.fitclassbooking.models.User;
 import com.codingdojo.fitclassbooking.repositories.FitnessClassRepository;
 
 
@@ -70,5 +71,18 @@ public class FitnessClassService {
 	 public List<FitnessClass> allFitnessClasses() {
 	     return fitnessClassRepository.findAll();
 	 }
+	 
+	 public FitnessClass updateFitnessClass(FitnessClass fitnessClass) {
+	 	   return fitnessClassRepository.save(fitnessClass);
+	 	}
 	
+	 public void bookFitnessClass(FitnessClass fitnessClass, User user) {
+		 fitnessClass.getStudents().add(user);
+	     fitnessClassRepository.save(fitnessClass);
+	 }
+	 
+	 public void cancelFitnessClass(FitnessClass fitnessClass, User user) {
+		 fitnessClass.getStudents().remove(user);
+	     fitnessClassRepository.save(fitnessClass);
+	 }
 }

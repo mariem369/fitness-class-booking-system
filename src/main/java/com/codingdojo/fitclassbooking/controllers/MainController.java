@@ -19,6 +19,7 @@ import com.codingdojo.fitclassbooking.models.FitnessClass;
 import com.codingdojo.fitclassbooking.models.User;
 import com.codingdojo.fitclassbooking.models.Venue;
 import com.codingdojo.fitclassbooking.services.FitnessClassService;
+import com.codingdojo.fitclassbooking.services.UserService;
 import com.codingdojo.fitclassbooking.services.VenueService;
 
 import jakarta.servlet.http.HttpSession;
@@ -31,6 +32,8 @@ public class MainController {
     private FitnessClassService fitnessClassService;
 	@Autowired
     private VenueService venueService;
+	@Autowired
+    private UserService userService;
 	
 	@GetMapping("/addClass")
 	String addClass(Model model, HttpSession session) {
@@ -81,6 +84,7 @@ public class MainController {
 		FitnessClass fitnessClass = fitnessClassService.findFitnessClass(id);
 		for (User student : fitnessClass.getStudents()) {
 	        student.getFitnessClasses().remove(fitnessClass);
+	        userService.updateUser(student);
 	    }
     	fitnessClassService.deleteFitnessClass(id);
     	return "redirect:/instructors/dashboard";
@@ -125,5 +129,29 @@ public class MainController {
 	    	}
 	    	model.addAttribute("fitnessClass", fitnessClassService.findFitnessClass(id));
 	    	return "detailClass.jsp";
+	    }
+	    
+	    @PostMapping("/fitnessClasses/{id}/book")
+	    String bookFitnessClass(@PathVariable("id") Long id, HttpSession session) {
+	    	if (session.getAttribute("userId") == null ) {
+	    		return "redirect:/";
+	    	}
+	    	Long userId = (Long) session.getAttribute("userId");
+	    	User user = userService.findUser(userId);
+	    	FitnessClass fitnessClass = fitnessClassService.findFitnessClass(id);
+	    	fitnessClassService.bookFitnessClass(fitnessClass, user);
+	    	return "redirect:/users/dashboard";
+	    }
+	    
+	    @PostMapping("/fitnessClasses/{id}/cancel")
+	    String cancelFitnessClass(@PathVariable("id") Long id, HttpSession session) {
+	    	if (session.getAttribute("userId") == null ) {
+	    		return "redirect:/";
+	    	}
+	    	Long userId = (Long) session.getAttribute("userId");
+	    	User user = userService.findUser(userId);
+	    	FitnessClass fitnessClass = fitnessClassService.findFitnessClass(id);
+	    	fitnessClassService.cancelFitnessClass(fitnessClass, user);
+	    	return "redirect:/users/dashboard";
 	    }
 }
