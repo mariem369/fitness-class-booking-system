@@ -12,7 +12,7 @@
     <style>
       body {
         font-family: 'Roboto';
-        background-image: url('https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/1757362/66486_342406.jpeg'); /* Replace with your background image URL */
+        background-image: url('https://wallpaperset.com/w/full/6/c/0/101135.jpg'); /* Replace with your background image URL */
         background-size: cover;
         background-position: center;
         margin: 0;
@@ -28,6 +28,9 @@
         bottom: 0;
         width: 100%;
       }
+	  .custom-blue {
+	      color: #007bff; /* You can use any blue shade here */
+	  }
 
       .container {
         padding-top: 50px;
@@ -42,6 +45,7 @@
         border-radius: 10px;
         padding: 20px;
         margin: auto;
+        display: none; /* Initially hide all cards */
       }
 
       .form {
@@ -58,7 +62,29 @@
         max-width: 400px;
         margin: 10px;
       }
+
+      .active-card {
+        display: block; /* Show the active card */
+      }
     </style>
+    <script>
+      function showCard(cardId) {
+        // Hide all cards
+        const cards = document.querySelectorAll(".form-card");
+        cards.forEach(card => card.style.display = "none");
+        
+        // Show the selected card
+        const selectedCard = document.getElementById(cardId);
+        if (selectedCard) {
+          selectedCard.style.display = "block";
+        }
+      }
+
+      // Show Register card by default
+      document.addEventListener("DOMContentLoaded", function () {
+        showCard('registerCard');
+      });
+    </script>
   </head>
   <body>
     <!-- Navbar -->
@@ -71,14 +97,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="/login">Log In</a>
+              <a class="nav-link" href="javascript:void(0);" onclick="showCard('registerCard')">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/register">Register</a>
+              <a class="nav-link" href="javascript:void(0);" onclick="showCard('loginCard')">Log In</a>
             </li>
-            <!-- Contact Link Added -->
             <li class="nav-item">
-              <a class="nav-link" href="/contact">Contact</a>
+              <a class="nav-link" href="javascript:void(0);" onclick="showCard('contactCard')">Contact</a>
             </li>
           </ul>
         </div>
@@ -88,10 +113,10 @@
     <!-- Main Content -->
     <div class="container">
       <div class="row">
-        <!-- Registration Card on Left -->
+        <!-- Registration Card -->
         <div class="col-card">
-          <div class="form-card active-card" id="registerCard">
-            <h3 class="m-2 text-success fw-bold">Register</h3>
+          <div class="form-card" id="registerCard">
+            <h3 class="m-2 custom-blue fw-bold">Register</h3>
             <form:form action="/register" method="post" modelAttribute="newUser" class="form">
               <div class="d-flex p-1 m-1">
                 <form:label class="w-50" path="firstName">First Name :</form:label>
@@ -138,10 +163,10 @@
           </div>
         </div>
 
-        <!-- Login Card on Right -->
+        <!-- Login Card -->
         <div class="col-card">
           <div class="form-card" id="loginCard">
-            <h3 class="m-2 text-success fw-bold">Log In</h3>
+            <h3 class="m-2 custom-blue fw-bold">Log In</h3>
             <form:form action="/login" method="post" modelAttribute="newLogin" class="form">
               <div class="d-flex p-1 m-1">
                 <form:label class="w-50" path="email">Email :</form:label>
@@ -159,6 +184,16 @@
             </form:form>
           </div>
         </div>
+
+        <!-- Contact Card -->
+        <div class="col-card">
+          <div class="form-card" id="contactCard">
+            <h3 class="m-2 custom-blue fw-bold">Contact Us</h3>
+            <p>If you have any questions, feel free to contact us at:</p>
+            <p>Email: support@myapp.com</p>
+            <p>Phone: 123-456-7890</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -168,3 +203,4 @@
     </footer>
   </body>
 </html>
+

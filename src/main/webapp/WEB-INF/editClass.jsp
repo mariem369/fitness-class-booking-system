@@ -19,6 +19,10 @@
         background-repeat: no-repeat;
         height: 100vh; /* Make the background cover the whole viewport */
       }
+	  .custom-blue {
+	      color: #007bff; 
+	  }
+
 
       .form-container {
         background-color: rgba(255, 255, 255, 0.8);
@@ -53,7 +57,7 @@
     <!-- Edit Class Form -->
     <div class="container">
       <div class="form-container">
-        <h3 class="text-center text-success">Edit Fitness Class</h3>
+        <h3 class="text-center custom-blue">Edit Fitness Class</h3>
         <form:form action="/fitnessClasses/update/${fitnessClass.id}" method="post" modelAttribute="fitnessClass" enctype="multipart/form-data" class="form">
           <form:input type="hidden" path="instructor" value="${userId}" />
           <input type="hidden" name="_method" value="put" />
@@ -129,7 +133,7 @@
             </div>
             <form:errors class="text-danger" path="maxStudents"/>
           </div>
-          <button type="submit" class="btn btn-success w-100">Edit</button>
+          <button type="submit" class="btn btn-primary w-100">Edit</button>
         </form:form>
       </div>
     </div>

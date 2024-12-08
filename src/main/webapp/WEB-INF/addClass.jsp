@@ -18,12 +18,13 @@
 
       body {
         font-family: 'Roboto';
-        background-image: url('https://t4.ftcdn.net/jpg/09/52/95/27/360_F_952952792_K2Y8UWetVVHwEjr2NQodueALGAwwQkeT.jpg'); /* Replace with your background image URL */
+         background-image: url('https://t4.ftcdn.net/jpg/09/52/95/27/360_F_952952792_K2Y8UWetVVHwEjr2NQodueALGAwwQkeT.jpg');
         background-size: cover;
         background-position: center;
         margin: 0;
         padding: 0;
       }
+	  
 
       footer {
         background-color: rgba(0, 0, 0, 0.6);
@@ -42,6 +43,9 @@
       .navbar {
         margin-bottom: 20px;
       }
+	  .custom-blue {
+	        color: #007bff; 
+	    }
 
       .form-container {
         background-color: rgba(255, 255, 255, 0.7);
@@ -77,7 +81,7 @@
       <div class="row">
         <!-- Form for Adding Class -->
         <div class="col-md-4 form-container">
-          <h3 class="text-center text-success fw-bold mb-2">Add Class</h3>
+          <h3 class="text-center custom-blue fw-bold mb-2">Add Class</h3>
           <form:form action="/createFitnessClass" method="post" modelAttribute="fitnessClass" enctype="multipart/form-data" class="form">
             <form:input type="hidden" path="instructor" value="${userId}" />
             <div class="mb-3">
@@ -150,7 +154,7 @@
 
         <!-- Form for Adding Venue -->
         <div class="col-md-6 form-container">
-          <h3 class="text-center text-success fw-bold">Add Venue</h3>
+          <h3 class="text-center custom-blue fw-bold">Add Venue</h3>
           <form:form action="/createVenue" method="post" modelAttribute="venue" class="form">
             <div class="mb-3">
               <form:label class="form-label" path="name">Venue Name</form:label>
@@ -190,8 +194,8 @@
     <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 	<script>
-	    /* const defaultLat = '${job.latitude}';
-	     const defaultLng = '${job.longitude}';
+	     const defaultLat = 33.8869;
+	     const defaultLng = 9.5375;
 	     const map = L.map('map').setView([defaultLat, defaultLng], 13);
 
 	     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -241,7 +245,7 @@
 	                 console.error('Error fetching address:', error);
 	                 document.getElementById('address').value = 'Error fetching address';
 	             });
-	     }); */
+	     }); 
 	   </script>
   </body>
 </html>
