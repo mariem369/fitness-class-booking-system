@@ -192,7 +192,7 @@
     </footer>
 
     <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!--<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 	<script>
 	     const defaultLat = 33.8869;
 	     const defaultLng = 9.5375;
@@ -246,7 +246,7 @@
 	                 document.getElementById('address').value = 'Error fetching address';
 	             });
 	     }); 
-	   </script>
+	   </script> -->
   </body>
 </html>
 

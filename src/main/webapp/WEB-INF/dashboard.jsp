@@ -121,9 +121,9 @@
                     <p><strong>Address:</strong> ${fitnessClass.venue.address}</p>
                 </div>
                 <div class="class-actions">
-                    <a href="/fitnessClasses/${fitnessClass.id}/details" class="btn btn-info">Details</a>
+                    <a href="/fitnessClasses/${fitnessClass.id}/details" class="btn btn-info text-light">Details</a>
                     <form action="/fitnessClasses/${fitnessClass.id}/edit" method="post">
-                        <input type="submit" class="btn btn-warning" value="Edit">
+                        <input type="submit" class="btn btn-warning text-light" value="Edit">
                     </form>
                     <form action="/fitnessClasses/${fitnessClass.id}/delete" method="post">
                         <input type="hidden" name="_method" value="delete">
